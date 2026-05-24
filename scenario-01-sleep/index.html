@@ -340,6 +340,9 @@
   .module-d-grid, .switcher { grid-template-columns: 1fr; }
   .hotspot-wrapper { aspect-ratio: 3/4; }
   .hotspot-placeholder { object-position: left top; }
+  /* 補償 left-top crop 造成的水平位移 */
+  .dot-pillow { left: 93%; }
+  .dot-socks  { left: 83%; }
   .square-wrapper  { aspect-ratio: 1; }
   .module-c-text   { padding: 48px 28px; }
   .d-img           { min-height: 300px; }
