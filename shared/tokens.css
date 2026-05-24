@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════════════════
+   CYORA Family Platform — Design Tokens & Shared Components
+   引入方式: <link rel="stylesheet" href="../shared/tokens.css">
+   ═══════════════════════════════════════════════════════════ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Design Tokens ── */
+:root {
+  --cream:       #F5F1EC;
+  --warm-white:  #FAFAF8;
+  --text-dark:   #1E1E1E;
+  --text-mid:    #5A5A5A;
+  --text-light:  #9A9A9A;
+  --accent:      #8B7355;
+  --rule:        #D8D0C8;
+}
+
+/* ── Base ── */
+body {
+  font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ── 共用排版 ── */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 6px;
+  color: var(--accent);
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.7rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 1.5;
+}
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0 64px;
+}
+
+/* ── 白點（Hotspot Dot）── */
+.dot {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.dot-ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  border-radius: 50%;
+  animation: pulse 2.8s ease-out infinite;
+}
+.dot-core {
+  position: absolute;
+  inset: 7px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.dot:hover .dot-core,
+.dot.active .dot-core { transform: scale(1.2); background: #fff; }
+@keyframes pulse {
+  0%  { transform: scale(1);   opacity: 0.75; }
+  65% { transform: scale(1.9); opacity: 0;    }
+  100%{ transform: scale(1);   opacity: 0;    }
+}
+
+/* ── 產品文字 ── */
+.prod-tag  { font-size: 0.65rem; letter-spacing: 5px; color: var(--accent); }
+.prod-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+.prod-spec  { font-size: 0.82rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; }
+.prod-price {
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+.prod-copy {
+  font-size: 0.85rem;
+  line-height: 2;
+  color: var(--text-mid);
+  font-weight: 300;
+  border-left: 2px solid var(--rule);
+  padding-left: 18px;
+}
+
+/* ── 按鈕 ── */
+.btn-primary {
+  display: inline-block;
+  padding: 14px 40px;
+  background: var(--text-dark);
+  color: #fff;
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  cursor: pointer;
+  border: none;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--accent); }
+.btn-ghost {
+  background: none;
+  border: none;
+  font-size: 0.72rem;
+  color: var(--text-light);
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 0;
+  margin-top: 8px;
+  text-decoration: underline;
+}
+.btn-card {
+  margin-top: 16px;
+  padding: 11px 0;
+  background: var(--text-dark);
+  color: #fff;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+.btn-card:hover { background: var(--accent); }
+
+/* ── Panel 動畫 ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.panel-product { display: none; flex-direction: column; gap: 18px; }
+.panel-product.active { display: flex; animation: fadeUp 0.3s ease; }
+
+/* ── 手機 Bottom Sheet ── */
+.sheet-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.38);
+  z-index: 200;
+  align-items: flex-end;
+}
+.sheet-overlay.open { display: flex; }
+.sheet {
+  background: #fff;
+  padding: 40px 32px 48px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: slideUp 0.28s ease;
+  position: relative;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.sheet-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-light);
+  background: none;
+  border: none;
+}
+
+/* ── 手機共用 ── */
+@media (max-width: 900px) {
+  .container { padding: 0 28px; }
+  hr.rule    { margin: 0 28px; }
+}

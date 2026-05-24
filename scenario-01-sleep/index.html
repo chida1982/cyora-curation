@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>懷孕後期，好好睡這件事｜CYORA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
+<!-- 共用設計系統 -->
+<link rel="stylesheet" href="../shared/tokens.css">
+<style>
+/* ── Hero ── */
+.hero {
+  position: relative;
+  height: 92vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/hero_bg.jpg') center center / cover no-repeat;
+  transform: scale(1.08);
+  will-change: transform;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,14,10,0.72) 0%, rgba(20,14,10,0.1) 55%, transparent 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 72px 72px;
+  max-width: 780px;
+  color: #fff;
+}
+.hero-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: 4px;
+  margin-bottom: 28px;
+}
+.hero-body {
+  font-size: 0.9rem;
+  line-height: 2;
+  color: rgba(255,255,255,0.72);
+  font-weight: 300;
+  max-width: 480px;
+}
+
+/* ── 情境引言 Bridge ── */
+.bridge { background: var(--text-dark); }
+.bridge-concepts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.concept-item {
+  padding: 48px 56px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.concept-item:last-child { border-right: none; }
+.concept-num   { font-size: 0.65rem; letter-spacing: 4px; color: rgba(255,255,255,0.35); }
+.concept-title { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; font-weight: 300; color: rgba(255,255,255,0.88); letter-spacing: 2px; }
+.concept-desc  { font-size: 0.82rem; line-height: 1.9; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+/* ─────────────────────────────────────────
+   Guide｜睡前行動指引
+───────────────────────────────────────── */
+.guide {
+  position: relative;
+  padding: 110px 0 140px;
+  overflow: hidden;
+}
+.guide-bg {
+  position: absolute;
+  inset: -22%;
+  background: url('images/guide_bg.jpg') center center / cover no-repeat;
+  will-change: transform;
+}
+.guide-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12,8,4,0.48);
+}
+.guide-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+.guide-header {
+  margin-bottom: 80px;
+  color: #fff;
+  text-align: center;
+}
+.guide-header .section-label { color: rgba(255,255,255,0.45); margin-bottom: 20px; }
+.guide-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 3px;
+}
+.guide-title em {
+  font-style: normal;
+  color: rgba(255,255,255,0.48);
+  display: block;
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  margin-top: 18px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* 不規則錯位卡片格線 */
+.guide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 0;
+  align-items: start;
+}
+.guide-card {
+  background: var(--cream);
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: default;
+}
+.guide-card:hover { transform: translateY(-10px); }
+.guide-card:nth-child(1) { padding-right: 48px; }
+.guide-card:nth-child(2) { margin-top: 100px; padding-left: 28px; }
+.guide-card:nth-child(3) { margin-top: 20px; padding-right: 28px; }
+.guide-card:nth-child(4) { margin-top: 60px; }
+.guide-step {
+  font-size: 0.62rem;
+  letter-spacing: 5px;
+  color: var(--accent);
+  transition: letter-spacing 0.38s ease, opacity 0.38s ease;
+}
+.guide-card:hover .guide-step { letter-spacing: 8px; opacity: 0.7; }
+.guide-card-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  line-height: 1.5;
+}
+.guide-card-illus { aspect-ratio: 1; overflow: hidden; margin: 4px 0; }
+.guide-card-illus img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.guide-card:hover .guide-card-illus img { transform: scale(1.05); }
+.guide-card-desc { font-size: 0.82rem; line-height: 2; color: var(--text-mid); font-weight: 300; }
+.guide-swipe-hint { display: none; }
+
+/* ─────────────────────────────────────────
+   模組 A｜白點，圖左文右
+───────────────────────────────────────── */
+.module-a { padding: 120px 0 80px; background: var(--warm-white); }
+.module-a-grid {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  gap: 0;
+  align-items: center;
+  padding-left: 80px;
+}
+.hotspot-wrapper { position: relative; aspect-ratio: 1; overflow: hidden; }
+.hotspot-placeholder { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dot-pillow { top: 56%; left: 70%; }
+.dot-socks  { top: 74%; left: 62%; }
+.module-a-text { display: flex; flex-direction: column; padding: 0 64px 0 80px; }
+
+.panel-default h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.45rem;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.panel-default p { font-size: 0.88rem; line-height: 2; color: var(--text-mid); font-weight: 300; }
+.panel-default .hint { margin-top: 32px; font-size: 0.68rem; letter-spacing: 3px; color: var(--text-light); }
+
+/* ─────────────────────────────────────────
+   模組 C｜文左圖右，3 白點
+───────────────────────────────────────── */
+.module-c { padding: 120px 0; background: var(--cream); }
+.module-c-grid {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 0;
+  align-items: stretch;
+  min-height: 580px;
+}
+.square-wrapper { position: relative; aspect-ratio: 1; overflow: hidden; align-self: center; }
+.square-placeholder { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dotC-yoga    { top: 35%; left: 25%; }
+.dotC-pad     { top: 63%; left: 28%; }
+.dotC-calcium { top: 52%; left: 70%; }
+.module-c-text {
+  background: var(--warm-white);
+  padding: 72px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.c-panel-default { display: flex; flex-direction: column; gap: 16px; }
+.c-panel-default h3 { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; font-weight: 300; line-height: 1.8; letter-spacing: 2px; }
+.c-panel-default p  { font-size: 0.85rem; line-height: 2; color: var(--text-mid); font-weight: 300; }
+.c-panel-default .hint { margin-top: 28px; font-size: 0.68rem; letter-spacing: 3px; color: var(--text-light); }
+.c-panel-product { display: none; flex-direction: column; gap: 18px; }
+.c-panel-product.active { display: flex; animation: fadeUp 0.3s ease; }
+
+/* ─────────────────────────────────────────
+   模組 D｜圖左 + 手風琴產品列
+───────────────────────────────────────── */
+.module-d { padding: 0; background: var(--warm-white); }
+.module-d-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 640px; }
+.d-img { position: relative; overflow: hidden; }
+.d-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.d-panel { background: var(--cream); padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+.d-intro { margin-bottom: 40px; }
+.d-intro p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; font-weight: 300; }
+.d-list { display: flex; flex-direction: column; }
+.d-item { border-top: 1px solid var(--rule); cursor: pointer; overflow: hidden; }
+.d-item:last-child { border-bottom: 1px solid var(--rule); }
+.d-item-head { display: flex; align-items: center; gap: 24px; padding: 22px 0; transition: opacity 0.2s; }
+.d-item:hover .d-item-head { opacity: 0.6; }
+.d-item.open .d-item-head { opacity: 1; }
+.d-num { font-size: 0.68rem; letter-spacing: 3px; color: var(--text-light); min-width: 28px; transition: color 0.25s; }
+.d-item.open .d-num { color: var(--accent); }
+.d-item-name { font-size: 0.98rem; font-weight: 400; letter-spacing: 0.5px; flex: 1; }
+.d-arrow { font-size: 0.7rem; color: var(--text-light); transition: transform 0.3s; }
+.d-item.open .d-arrow { transform: rotate(90deg); color: var(--accent); }
+.d-detail { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.d-item.open .d-detail { max-height: 380px; }
+.d-detail-inner { padding: 0 0 32px 52px; display: flex; flex-direction: row; gap: 36px; align-items: flex-start; }
+.d-detail-img { width: 150px; flex-shrink: 0; aspect-ratio: 1; overflow: hidden; }
+.d-detail-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.d-detail-info { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.d-detail-info .prod-price { border-top: 1px solid var(--rule); padding-top: 12px; font-size: 1rem; }
+.d-detail-info .btn-primary { margin-top: 4px; padding: 11px 32px; font-size: 0.72rem; }
+
+/* ─────────────────────────────────────────
+   模組 B｜左右切換
+───────────────────────────────────────── */
+.module-b { padding: 0 0 120px; background: var(--cream); }
+.module-b-header { padding: 100px 0 60px; }
+.switcher { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; }
+.sw-img { position: relative; cursor: pointer; overflow: hidden; }
+.sw-img-ph {
+  width: 100%; height: 100%; min-height: 560px;
+  background: url('images/module-b_01.jpg') center center / cover no-repeat;
+  transition: opacity 0.35s ease;
+}
+.sw-img-ph.cream-bg { background: url('images/module-b_02.jpg') center center / cover no-repeat; }
+.sw-nav { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; }
+.sw-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.45); cursor: pointer; transition: background 0.25s, transform 0.25s; }
+.sw-dot.active { background: #fff; transform: scale(1.4); }
+.sw-text { background: #fff; padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+.sw-panel { display: none; flex-direction: column; gap: 20px; animation: fadeUp 0.3s ease; }
+.sw-panel.active { display: flex; }
+
+/* ── 文章區 ── */
+.articles { padding: 120px 0; background: var(--warm-white); }
+.articles-header { margin-bottom: 60px; }
+.articles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.article-card { background: var(--warm-white); padding: 44px 40px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: background 0.2s; }
+.article-card:hover { background: var(--cream); }
+.article-card .a-tag  { font-size: 0.62rem; letter-spacing: 4px; color: var(--accent); }
+.article-card h3      { font-size: 1rem; font-weight: 400; line-height: 1.65; letter-spacing: 0.5px; }
+.article-card p       { font-size: 0.82rem; color: var(--text-mid); line-height: 1.85; font-weight: 300; }
+.article-card .a-link { margin-top: auto; padding-top: 16px; font-size: 0.7rem; color: var(--accent); letter-spacing: 2px; border-top: 1px solid var(--rule); }
+
+/* ── 推薦產品 ── */
+.more-products { padding: 120px 0; background: var(--cream); }
+.products-header { margin-bottom: 56px; }
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.prod-card { background: var(--cream); display: flex; flex-direction: column; cursor: pointer; transition: background 0.2s; }
+.prod-card:hover { background: var(--warm-white); }
+.prod-card-img { aspect-ratio: 1; overflow: hidden; background: #EDE8E0; }
+.prod-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.prod-card-body { padding: 28px 28px 36px; display: flex; flex-direction: column; gap: 8px; flex: 1; border-top: 1px solid var(--rule); }
+.prod-card-name  { font-size: 0.95rem; font-weight: 400; line-height: 1.5; }
+.prod-card-desc  { font-size: 0.78rem; color: var(--text-mid); line-height: 1.8; font-weight: 300; }
+.prod-card-price { font-size: 0.95rem; font-weight: 400; margin-top: 8px; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .bridge-concepts { grid-template-columns: 1fr; }
+  .concept-item    { padding: 36px 28px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .concept-item:last-child { border-bottom: none; }
+  .guide-inner  { padding: 0 20px; }
+  .guide-header { margin-bottom: 36px; }
+  .guide-swipe-hint {
+    display: block;
+    font-size: 0.65rem; letter-spacing: 4px;
+    color: rgba(255,255,255,0.4); text-align: center; margin-bottom: 20px;
+  }
+  .guide-grid {
+    display: flex; flex-wrap: nowrap; overflow-x: auto;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    gap: 10px; padding-bottom: 8px;
+    margin-left: -20px; margin-right: -20px;
+    padding-left: 20px; padding-right: 20px;
+  }
+  .guide-grid::-webkit-scrollbar { display: none; }
+  .guide-card {
+    width: 62vw; min-width: 62vw; max-width: 62vw;
+    flex-shrink: 0; overflow: hidden; scroll-snap-align: start;
+    padding: 28px 22px; margin-top: 0 !important;
+    padding-right: 22px !important; padding-left: 22px !important;
+    transition: none;
+  }
+  .guide-card:hover { transform: none; }
+  .guide-card:hover .guide-card-illus img { transform: none; }
+  .guide-card:hover .guide-step { letter-spacing: 5px; opacity: 1; }
+  .guide-card-illus { width: 100%; }
+  .hero-content { padding: 0 32px 56px; }
+  .module-a-grid { grid-template-columns: 1fr; padding-left: 0; }
+  .module-a-text { padding: 32px 28px; }
+  .module-c-grid { grid-template-columns: 1fr; }
+  .module-c-grid .square-wrapper { order: 2; }
+  .module-c-grid .module-c-text  { order: 1; }
+  .module-d-grid, .switcher { grid-template-columns: 1fr; }
+  .hotspot-wrapper { aspect-ratio: 3/4; }
+  .square-wrapper  { aspect-ratio: 1; }
+  .module-c-text   { padding: 48px 28px; }
+  .d-img           { min-height: 300px; }
+  .d-panel         { padding: 52px 28px; }
+  .d-detail-inner  { flex-direction: column; padding: 0 0 24px 0; gap: 20px; }
+  .d-detail-img    { width: 100%; aspect-ratio: 4/3; }
+  .d-item.open .d-detail { max-height: 640px; }
+  .sw-img-ph { min-height: 320px; }
+  .sw-text   { padding: 52px 32px; }
+  .module-b-header { padding: 80px 0 48px; }
+  .articles-grid  { grid-template-columns: 1fr; }
+  .products-grid  { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">懷孕後期，<br>好好睡這件事</h1>
+    <p class="hero-body">肚子愈來愈大，側躺的姿勢也需要愈來愈多一點的幫助。這裡整理了孕後期最實用的紓緩組合——從睡姿支撐到腿腳保養，讓每個夜晚都比前一晚好睡一點點。</p>
+  </div>
+</section>
+
+<!-- ── 情境引言 Bridge ── -->
+<section class="bridge">
+  <div class="bridge-concepts">
+    <div class="concept-item">
+      <div class="concept-num">01</div>
+      <div class="concept-title">睡姿</div>
+      <div class="concept-desc">側躺是孕後期最安全的姿勢，但隨著肚子變大，需要更多的支撐才能讓身體整晚維持在對的位置。</div>
+    </div>
+    <div class="concept-item">
+      <div class="concept-num">02</div>
+      <div class="concept-title">腿腳</div>
+      <div class="concept-desc">水腫和循環變慢是孕後期的常見現象，睡前的保養和輔助，能讓夜晚的不舒服少一點。</div>
+    </div>
+    <div class="concept-item">
+      <div class="concept-num">03</div>
+      <div class="concept-title">睡前儀式</div>
+      <div class="concept-desc">小小的睡前動作，讓身體知道休息要開始了。不需要大幅改變，幾個固定的步驟就能有明顯的差別。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 睡前行動指引 Guide ── -->
+<section class="guide">
+  <div class="guide-bg" id="guideBg"></div>
+  <div class="guide-overlay"></div>
+  <div class="guide-inner">
+    <div class="guide-header">
+      <div class="section-label">睡前準備</div>
+      <div class="guide-title">
+        「這四件事，讓夜晚準備好迎接你」
+        <em>不需要大幅改變，只是多一點刻意的準備。</em>
+      </div>
+    </div>
+    <div class="guide-swipe-hint" aria-hidden="true">← 左右滑動 →</div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-step">step 01</div>
+        <div class="guide-card-title">為腿腳減壓</div>
+        <div class="guide-card-illus"><img src="images/guide_step01.png" alt="為腿腳減壓"></div>
+        <div class="guide-card-desc">坐在床邊，從腳踝往小腿輕輕按摩，或塗抹舒緩霜。讓腿部從一整天的重量裡放鬆下來，睡著後就不容易抽筋或悶脹。</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-step">step 02</div>
+        <div class="guide-card-title">找到側躺的位置</div>
+        <div class="guide-card-illus"><img src="images/guide_step02.png" alt="找到側躺的位置"></div>
+        <div class="guide-card-desc">月亮枕放在腰後，膝蓋間夾一個軟枕，讓脊椎維持自然的弧度。整晚不需要頻繁翻身，身體也更容易進入深層休息。</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-step">step 03</div>
+        <div class="guide-card-title">補充身體需要的</div>
+        <div class="guide-card-illus"><img src="images/guide_step03.png" alt="補充身體需要的"></div>
+        <div class="guide-card-desc">一包鈣鎂睡前配方，在準備躺下前 30 分鐘補充。鎂有助於肌肉放鬆，讓身體從緊繃的狀態裡緩下來，準備好進入休息。</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-step">step 04</div>
+        <div class="guide-card-title">讓感官安靜下來</div>
+        <div class="guide-card-illus"><img src="images/guide_step04.png" alt="讓感官安靜下來"></div>
+        <div class="guide-card-desc">閉上眼睛，做三個緩慢的深呼吸。感受身體被支撐的重量——這一夜，你不需要撐著任何東西。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 模組 A｜白點，圖左文右 ── -->
+<section class="module-a">
+  <div class="module-a-grid">
+    <div class="hotspot-wrapper">
+      <img class="hotspot-placeholder" src="images/module-a_hotspot.jpg" alt="孕婦靠月亮枕側躺">
+      <div class="dot dot-pillow" data-mod="a" data-key="pillow" id="dotA-pillow">
+        <div class="dot-ring"></div><div class="dot-core"></div>
+      </div>
+      <div class="dot dot-socks" data-mod="a" data-key="socks" id="dotA-socks">
+        <div class="dot-ring"></div><div class="dot-core"></div>
+      </div>
+    </div>
+    <div class="module-a-text">
+      <div class="panel-default" id="panelA-default">
+        <h3>「側睡這件事，<br>值得多一點支撐」</h3>
+        <p>孕後期的身體有自己的節奏，好的枕頭和腿部支撐能讓整夜的姿勢更自然、更安穩。</p>
+        <p class="hint">移到白點查看產品</p>
+      </div>
+      <div class="panel-product" id="panelA-pillow">
+        <span class="prod-tag">睡姿支撐</span>
+        <div class="prod-name">月亮枕</div>
+        <div class="prod-spec">C 型設計 &nbsp;·&nbsp; 100% 天然棉<br>適合孕後期全程側躺支撐</div>
+        <div class="prod-price">NT$1,280</div>
+        <button class="btn-primary">立即購買</button>
+        <button class="btn-ghost" onclick="resetA()">返回</button>
+      </div>
+      <div class="panel-product" id="panelA-socks">
+        <span class="prod-tag">腿腳保養</span>
+        <div class="prod-name">孕婦漸進式壓力襪</div>
+        <div class="prod-spec">15–20 mmHg &nbsp;·&nbsp; M / L / XL<br>孕期水腫、腿部循環適用</div>
+        <div class="prod-price">NT$480</div>
+        <button class="btn-primary">立即購買</button>
+        <button class="btn-ghost" onclick="resetA()">返回</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── 模組 C｜文左圖右，3 白點 ── -->
+<section class="module-c">
+  <div class="container">
+    <div class="module-c-grid">
+      <div class="module-c-text">
+        <div class="c-panel-default" id="panelC-default">
+          <h3>「睡前的準備，<br>從環境開始」</h3>
+          <p>一個對的空間，讓身體更自然進入休息的狀態。這裡收集了孕後期最值得放進臥室的三樣東西。</p>
+          <p class="hint">移到白點查看產品</p>
+        </div>
+        <div class="c-panel-product" id="panelC-yoga">
+          <span class="prod-tag">舒緩輔具</span>
+          <div class="prod-name">孕婦瑜伽枕</div>
+          <div class="prod-spec">多功能設計 &nbsp;·&nbsp; 側躺支撐、伸展輔助<br>全棉外套可拆洗</div>
+          <div class="prod-price">NT$980</div>
+          <button class="btn-primary">立即購買</button>
+          <button class="btn-ghost" onclick="resetC()">返回</button>
+        </div>
+        <div class="c-panel-product" id="panelC-pad">
+          <span class="prod-tag">夜間防護</span>
+          <div class="prod-name">夜間防水尿墊</div>
+          <div class="prod-spec">70×90 cm &nbsp;·&nbsp; 孕後期夜晚安心用<br>TPU 防水層，透氣不悶熱</div>
+          <div class="prod-price">NT$290</div>
+          <button class="btn-primary">立即購買</button>
+          <button class="btn-ghost" onclick="resetC()">返回</button>
+        </div>
+        <div class="c-panel-product" id="panelC-calcium">
+          <span class="prod-tag">孕期營養</span>
+          <div class="prod-name">孕期鈣鎂睡前配方</div>
+          <div class="prod-spec">液態吸收型 &nbsp;·&nbsp; 30 包 / 盒<br>睡前 30 分鐘補充，幫助放鬆</div>
+          <div class="prod-price">NT$890</div>
+          <button class="btn-primary">立即購買</button>
+          <button class="btn-ghost" onclick="resetC()">返回</button>
+        </div>
+      </div>
+      <div class="square-wrapper">
+        <img class="square-placeholder" src="images/module-c_hotspot.jpg" alt="孕婦床邊情境">
+        <div class="dot dotC-yoga" data-mod="c" data-key="yoga" id="dotC-yoga">
+          <div class="dot-ring"></div><div class="dot-core"></div>
+        </div>
+        <div class="dot dotC-pad" data-mod="c" data-key="pad" id="dotC-pad">
+          <div class="dot-ring"></div><div class="dot-core"></div>
+        </div>
+        <div class="dot dotC-calcium" data-mod="c" data-key="calcium" id="dotC-calcium">
+          <div class="dot-ring"></div><div class="dot-core"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── 模組 D｜手風琴產品列 ── -->
+<section class="module-d">
+  <div class="module-d-grid">
+    <div class="d-img"><img src="images/module-d_ambient.jpg" alt="睡前保養情境"></div>
+    <div class="d-panel">
+      <div class="section-label">睡前儀式</div>
+      <div class="section-title" style="margin-bottom:32px;">「讓身體知道，<br>休息要開始了」</div>
+      <div class="d-intro">
+        <p>孕後期的夜晚，睡前的幾個動作比以前更重要。這三樣東西，讓你可以有方向地準備入睡。</p>
+      </div>
+      <div class="d-list">
+        <div class="d-item" id="dItem0" onclick="toggleD(0)">
+          <div class="d-item-head">
+            <span class="d-num">01</span>
+            <span class="d-item-name">清涼薄荷腿部舒緩霜</span>
+            <span class="d-arrow">›</span>
+          </div>
+          <div class="d-detail">
+            <div class="d-detail-inner">
+              <div class="d-detail-img"><img src="images/product_leg-cream.jpg" alt="清涼薄荷腿部舒緩霜"></div>
+              <div class="d-detail-info">
+                <span class="prod-spec">150 ml &nbsp;·&nbsp; 孕婦安全成分</span>
+                <span class="prod-copy">睡前輕輕按摩，讓腿腳從一天的負擔裡鬆開。</span>
+                <span class="prod-price">NT$520</span>
+                <button class="btn-primary">立即購買</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-item" id="dItem1" onclick="toggleD(1)">
+          <div class="d-item-head">
+            <span class="d-num">02</span>
+            <span class="d-item-name">孕期睡眠芳療滾珠</span>
+            <span class="d-arrow">›</span>
+          </div>
+          <div class="d-detail">
+            <div class="d-detail-inner">
+              <div class="d-detail-img"><img src="images/product_roller.jpg" alt="孕期睡眠芳療滾珠"></div>
+              <div class="d-detail-info">
+                <span class="prod-spec">10 ml &nbsp;·&nbsp; 薰衣草＋洋甘菊，孕期安全</span>
+                <span class="prod-copy">塗抹太陽穴或手腕內側，讓感官慢慢靜下來。</span>
+                <span class="prod-price">NT$450</span>
+                <button class="btn-primary">立即購買</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-item" id="dItem2" onclick="toggleD(2)">
+          <div class="d-item-head">
+            <span class="d-num">03</span>
+            <span class="d-item-name">孕期鈣鎂睡前配方</span>
+            <span class="d-arrow">›</span>
+          </div>
+          <div class="d-detail">
+            <div class="d-detail-inner">
+              <div class="d-detail-img"><img src="images/product_calcium.jpg" alt="孕期鈣鎂睡前配方"></div>
+              <div class="d-detail-info">
+                <span class="prod-spec">液態吸收型 &nbsp;·&nbsp; 30 包 / 盒</span>
+                <span class="prod-copy">睡前補充，讓身體準備好進入休息。</span>
+                <span class="prod-price">NT$890</span>
+                <button class="btn-primary">立即購買</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── 模組 B｜左右切換 ── -->
+<section class="module-b">
+  <div class="container">
+    <div class="module-b-header">
+      <div class="section-label">睡姿輔助</div>
+      <div class="section-title">「每一種不舒服，<br>都有對應的解法」</div>
+    </div>
+  </div>
+  <div class="switcher">
+    <div class="sw-img" onclick="nextSw()">
+      <div class="sw-img-ph" id="swImgPh"></div>
+      <div class="sw-nav">
+        <div class="sw-dot active" onclick="switchTo(0,event)"></div>
+        <div class="sw-dot"        onclick="switchTo(1,event)"></div>
+      </div>
+    </div>
+    <div class="sw-text">
+      <div class="sw-panel active">
+        <span class="prod-tag">腰背支撐</span>
+        <div class="prod-name">孕婦腰部支撐帶</div>
+        <div class="prod-spec">透氣彈性布料 &nbsp;·&nbsp; 可調節鬆緊<br>孕中後期日常穿戴</div>
+        <div class="prod-price">NT$680</div>
+        <p class="prod-copy">白天穿著可以，睡前換上輕薄款，讓腰部整晚都有一點被扶著的感覺。</p>
+        <button class="btn-primary">立即購買</button>
+      </div>
+      <div class="sw-panel">
+        <span class="prod-tag">腿腳循環</span>
+        <div class="prod-name">孕婦腿部按摩滾輪</div>
+        <div class="prod-spec">雙頭設計 &nbsp;·&nbsp; 小腿 / 腳底按摩<br>孕後期水腫、疲勞感適用</div>
+        <div class="prod-price">NT$380</div>
+        <p class="prod-copy">睡前五分鐘，從腳踝往上慢慢滾，比躺著更容易進入好眠狀態。</p>
+        <button class="btn-primary">立即購買</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ── 文章區 ── -->
+<section class="articles">
+  <div class="container">
+    <div class="articles-header">
+      <div class="section-label">情境指南</div>
+      <div class="section-title">再多了解一點點</div>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card">
+        <span class="a-tag">孕期知識</span>
+        <h3>孕後期為什麼睡得這麼淺？了解身體在做什麼</h3>
+        <p>了解身體正在發生什麼，找到最適合自己的調整方式</p>
+        <span class="a-link">閱讀文章 →</span>
+      </div>
+      <div class="article-card">
+        <span class="a-tag">選品指南</span>
+        <h3>月亮枕怎麼挑？C 型 vs U 型完整比較</h3>
+        <p>找到最適合你睡眠習慣的款式，從今晚開始更有支撐</p>
+        <span class="a-link">閱讀文章 →</span>
+      </div>
+      <div class="article-card">
+        <span class="a-tag">水腫保養</span>
+        <h3>孕期水腫怎麼辦？從日常調整到輔助商品</h3>
+        <p>從日常小調整開始，讓身體在孕後期也能維持輕盈感</p>
+        <span class="a-link">閱讀文章 →</span>
+      </div>
+      <div class="article-card">
+        <span class="a-tag">成分安心</span>
+        <h3>孕婦安心外用指南：哪些成分可以放心用？</h3>
+        <p>安心選用的成分指南，讓外用保養成為真正的放鬆時刻</p>
+        <span class="a-link">閱讀文章 →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 推薦產品 ── -->
+<section class="more-products">
+  <div class="container">
+    <div class="products-header">
+      <div class="section-label">更多推薦</div>
+      <div class="section-title">你可能也會喜歡</div>
+    </div>
+    <div class="products-grid">
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="images/product_yoga-pillow.jpg" alt="孕婦瑜伽枕"></div>
+        <div class="prod-card-body">
+          <div class="prod-card-name">孕婦瑜伽枕</div>
+          <div class="prod-card-desc">適合做孕期舒緩瑜伽，支撐側躺拉伸動作</div>
+          <div class="prod-card-price">NT$980</div>
+          <button class="btn-card">立即購買</button>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="images/product_waterproof-pad.jpg" alt="夜間防水尿墊"></div>
+        <div class="prod-card-body">
+          <div class="prod-card-name">夜間防水尿墊</div>
+          <div class="prod-card-desc">孕後期夜晚必備，保護床墊安心入睡</div>
+          <div class="prod-card-price">NT$290</div>
+          <button class="btn-card">立即購買</button>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="images/product_roller.jpg" alt="孕期睡眠芳療滾珠"></div>
+        <div class="prod-card-body">
+          <div class="prod-card-name">孕期睡眠芳療滾珠</div>
+          <div class="prod-card-desc">薰衣草＋洋甘菊，孕期安全，睡前使用</div>
+          <div class="prod-card-price">NT$450</div>
+          <button class="btn-card">立即購買</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Bottom Sheet（手機） ── -->
+<div class="sheet-overlay" id="sheetOverlay" onclick="closeSheet(event)">
+  <div class="sheet">
+    <button class="sheet-close" onclick="closeSheet()">✕</button>
+    <span class="prod-tag" id="sTag"></span>
+    <div class="prod-name" id="sName"></div>
+    <div class="prod-spec" id="sSpec"></div>
+    <div class="prod-price" id="sPrice"></div>
+    <button class="btn-primary" style="align-self:stretch;text-align:center;">立即購買</button>
+  </div>
+</div>
+
+<!-- 共用 JS -->
+<script src="../shared/main.js"></script>
+<script>
+// ── 視差 ──
+window.addEventListener('scroll', () => {
+  document.getElementById('heroBg').style.transform =
+    `scale(1.08) translateY(${window.scrollY * 0.28}px)`;
+  parallaxSection('guideBg', '.guide');
+}, { passive: true });
+
+// ── 模組 A 白點 ──
+const mobileDataA = {
+  pillow: { tag:'睡姿支撐', name:'月亮枕',         spec:'C 型 · 100% 天然棉', price:'NT$1,280' },
+  socks:  { tag:'腿腳保養', name:'孕婦漸進式壓力襪', spec:'15–20 mmHg · M/L/XL', price:'NT$480'  },
+};
+initDots({
+  mod: 'a',
+  mobileData: mobileDataA,
+  onActivate: (key) => {
+    document.querySelectorAll('.dot[data-mod="a"]').forEach(d => d.classList.remove('active'));
+    document.getElementById('dotA-' + key).classList.add('active');
+    document.getElementById('panelA-default').style.display = 'none';
+    document.querySelectorAll('.panel-product').forEach(p => p.classList.remove('active'));
+    document.getElementById('panelA-' + key).classList.add('active');
+  }
+});
+function resetA() {
+  document.querySelectorAll('.dot[data-mod="a"]').forEach(d => d.classList.remove('active'));
+  document.getElementById('panelA-default').style.display = '';
+  document.querySelectorAll('.panel-product').forEach(p => p.classList.remove('active'));
+}
+
+// ── 模組 C 白點 ──
+const mobileDataC = {
+  yoga:    { tag:'舒緩輔具', name:'孕婦瑜伽枕',      spec:'多功能 · 全棉可拆洗',   price:'NT$980'  },
+  pad:     { tag:'夜間防護', name:'夜間防水尿墊',    spec:'70×90cm · TPU 防水層', price:'NT$290'  },
+  calcium: { tag:'孕期營養', name:'孕期鈣鎂睡前配方', spec:'液態吸收型 · 30包/盒',  price:'NT$890'  },
+};
+initDots({
+  mod: 'c',
+  mobileData: mobileDataC,
+  onActivate: (key) => {
+    document.querySelectorAll('.dot[data-mod="c"]').forEach(d => d.classList.remove('active'));
+    document.getElementById('dotC-' + key).classList.add('active');
+    document.getElementById('panelC-default').style.display = 'none';
+    document.querySelectorAll('.c-panel-product').forEach(p => p.classList.remove('active'));
+    document.getElementById('panelC-' + key).classList.add('active');
+  }
+});
+function resetC() {
+  document.querySelectorAll('.dot[data-mod="c"]').forEach(d => d.classList.remove('active'));
+  document.getElementById('panelC-default').style.display = '';
+  document.querySelectorAll('.c-panel-product').forEach(p => p.classList.remove('active'));
+}
+
+// ── 模組 D 手風琴 ──
+initAccordion('.d-item');
+
+// ── 模組 B 切換 ──
+initSwitcher({ imgId: 'swImgPh', activeClass: 'cream-bg', dotSel: '.sw-dot', panelSel: '.sw-panel', count: 2 });
+</script>
+</body>
+</html>
