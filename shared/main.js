@@ -105,8 +105,8 @@ function initAccordion(selector) {
        count: 2,
      });
    ──────────────────────────────────────────────────────── */
-function initSwitcher({ imgId, activeClass, dotSel, panelSel, count }) {
-  let swIdx = 0;
+function initSwitcher({ imgId, activeClass, dotSel, panelSel, count, defaultIdx = 0 }) {
+  let swIdx = defaultIdx;
   function updateSw() {
     const ph = document.getElementById(imgId);
     ph.className = 'sw-img-ph' + (swIdx === count - 1 ? ` ${activeClass}` : '');
